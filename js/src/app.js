@@ -9,9 +9,15 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
     controller: 'TermCtrl',
     reloadOnSearch: false
   });
+  $routeProvider.when('/pounceit', {
+    templateUrl: 'partials/PounceConfig.html',
+    controller: 'PounceConfigViewCtrl',
+    reloadOnSearch: false
+  });
   $routeProvider.otherwise({
     redirectTo: '/',
     controller: 'MainCtrl',
     templateUrl: 'partials/main.html'
   });
+
 }]);

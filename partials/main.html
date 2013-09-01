@@ -1,30 +1,26 @@
-<div ng-init="InitPage()">
+<div >
     <div class="row">
         <div class="display-inline savingLoader" ng-show="saving"><i class="icon-spinner icon-spin" ></i> Saving</div>
-    <div class="row">
-        <alert ng-repeat="alert in alerts" type="alert.type" autoclose="alert.autoclose" autoclosetime="alert.autoclosetime" close="closeAlert($index)">{{alert.msg}}</alert>
-    </div>
-
-    <div class="jumbotron">
-        <div class="container" >
-            <h1>Check It</h1>
-            <p>Want to pounce on a domain name as soon as it's available? You can check it's availability and setup a pounce if it's not available.</p>
-
-            <form ng-submit="searchForName()" class="form-inline">
-                <div class="row">
-                    <input class="input-medium input-search" type="text" ng-model="jobNumber" ng-disabled="disabled" placeholder="Search"/>
-                    <button class="btn btn-primary btn-lg"  type="submit" ng-disabled="disabled" ng-model="searchButtonText"><i class="icon-search" ng-class="{'icon-spinner icon-spin': searching}"></i> {{searchButtonText}}</button>
-                </div>
-            </form>
-
+        <div class="row">
+            <alert ng-repeat="alert in alerts" type="alert.type" autoclose="alert.autoclose" autoclosetime="alert.autoclosetime" close="closeAlert($index)">{{alert.msg}}</alert>
         </div>
-    </div>
-        
-        <div class="col-xs-12" >
-            <div class="container grid clearfix">
-                <pre>State: {{state}}</pre>
-                <pre>Model: {{selected}}</pre>
-                <input type="text" ng-model="selected" typeahead="state for state in states | filter:$viewValue | limitTo:8">
+
+        <div class="jumbotron">
+            <div class="container" >
+                <h1>Check It. Pounce It.</h1>
+                <p>Want to pounce on a domain name as soon as it's available? You can check it's availability here and setup a pounce if it's not available.</p>
+
+                <form ng-submit="CheckAvailability()" class="form-inline">
+                    <div class="row ">
+                        <div class="col-lg-4 form-group">
+                            <input class="input-lg input-search form-control" type="text" ng-model="nameQuery.domainName" ng-disabled="disabled" placeholder="Search"/>
+                        </div>
+                        <button class="btn btn-primary btn-lg"  type="submit" ng-disabled="disabled" ng-model="searchButtonText">
+                            <i class="icon-search" ng-class="{'icon-spinner icon-spin': searching}"></i> {{searchButtonText}}
+                        </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -32,10 +28,6 @@
 </div>
 
 <footer>
-    <!-- <div class="row"  ng-show="showGrid">
-        <ul class="unstyled inline legend span12">
-            <li ng-repeat="item in LegendItems" class="label {{item.CssClass}}"><i class="icon-tag"></i> {{item.Title}}</li>
-        </ul>
-    </div> -->
+<h3>3rdPie</h3>
 </footer>
 

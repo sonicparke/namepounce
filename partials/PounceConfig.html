@@ -1,0 +1,42 @@
+<div ng-init="InitPage()">
+    <div class="row">
+        <div class="display-inline savingLoader" ng-show="saving"><i class="icon-spinner icon-spin" ></i> Saving</div>
+        <div class="row">
+            <alert ng-repeat="alert in alerts" type="alert.type" autoclose="alert.autoclose" autoclosetime="alert.autoclosetime" close="closeAlert($index)">{{alert.msg}}</alert>
+        </div>
+
+        <div class="jumbotron">
+            <h2>Your username is {{nameQuery.userID}}</h2>
+            <h2>Setup a Pounce for {{nameQuery.domainName}}</h2>
+            <div class="container">
+
+
+                <form ng-submit="PounceIt()" class="form-inline">
+                    <div class="row ">
+                        <div class="col-lg-4 form-group">
+                            <input class="input-lg input-search form-control" type="email" ng-model="pounceIt.email" ng-disabled="disabled" placeholder="Email"/>
+                        </div>
+                        <button class="btn btn-primary btn-lg"  type="submit" ng-disabled="disabled" ng-model="searchButtonText">
+                            <i class="icon-search" ng-class="{'icon-spinner icon-spin': searching}"></i> {{pounceButtonText}}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            <div class="well" ng-show="showPost">
+                <ul class="unstyled">
+                    <li>Your UserName: {{pounceIt.userID}}</li>
+                    <li>Your Email: {{pounceIt.email}}</li>
+                    <li>Your Domain to Pounce: {{pounceIt.domainName}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    
+    <h3>3rdPie</h3>
+</footer>
+

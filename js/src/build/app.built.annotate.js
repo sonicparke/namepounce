@@ -13,6 +13,11 @@ app.config([
       controller: 'TermCtrl',
       reloadOnSearch: false
     });
+    $routeProvider.when('/pounceit', {
+      templateUrl: 'partials/PounceConfig.html',
+      controller: 'PounceConfigViewCtrl',
+      reloadOnSearch: false
+    });
     $routeProvider.otherwise({
       redirectTo: '/',
       controller: 'MainCtrl',
@@ -23,36 +28,91 @@ app.config([
 app.controller('MainCtrl', [
   '$scope',
   '$location',
-  '$http',
-  '$timeout',
-  'JobData',
-  function ($scope, $location, $http, $timeout, JobData) {
+  function ($scope, $location) {
     $scope.InitPage = function () {
-      $scope.PageTitle = 'Job Print';
+      $scope.PageTitle = 'Name Pounce';
       $scope.GetDataItems = [];
-      $scope.UserID = 'brad';
+      $scope.userID = '';
       $scope.searching = false;
       $scope.searchButtonText = 'Check Availability';
       $scope.saving = false;
+      $scope.disabled = false;
+      var blankform = { domainName: '' };
+      $scope.nameQuery = angular.copy(blankform);
+      $scope.CheckCredentials();
     };
     $scope.alerts = [];
     $scope.closeAlert = function (index) {
       $scope.alerts.splice(index, 1);
     };
-    $scope.searchForName = function () {
-      $scope.CheckAvailability();
+    $scope.CheckCredentials = function () {
+      if ($scope.userID.length > 0) {
+        $scope.loggedIn = true;
+      } else {
+        $scope.loggedIn = false;
+      }
     };
-    $scope.CheckAvailability = function (data) {
+    $scope.Login = function (data) {
+      console.log('login Creds:', $scope.login);
+      $scope.userID = $scope.login.userID;
+      $scope.CheckCredentials($scope.userID);
+    };
+    $scope.Logout = function (data) {
+      console.log('logout Creds:', $scope.logout);
+      $scope.userID = '';
+      $scope.CheckCredentials($scope.userID);
+    };
+    $scope.CheckAvailability = function () {
       $scope.searchButtonText = 'Checking';
       $scope.searching = true;
       $scope.disabled = true;
       $scope.alerts.length = 0;
-      $scope.alerts.push({
-        msg: 'Checked',
-        type: 'success',
-        autoclose: true,
-        autoclosetime: 3000
-      });
+      if ($scope.nameQuery.domainName === 'brad.com') {
+        $scope.domainAvailable = false;
+        $scope.resetForm();
+        $location.path('/pounceit');
+      } else {
+        $scope.domainAvailable = true;
+        $scope.resetForm();
+        $scope.alerts.push({
+          msg: 'Domain is Available!',
+          type: 'success',
+          autoclose: true,
+          autoclosetime: 3000
+        });
+      }
+    };
+    $scope.resetForm = function () {
+      $scope.searching = false;
+      $scope.searchButtonText = 'Check Availability';
+      $scope.saving = false;
+      $scope.disabled = false;
+    };
+  }
+]);
+app.controller('PounceConfigViewCtrl', [
+  '$scope',
+  '$location',
+  function ($scope, $location) {
+    $scope.InitPage = function () {
+      $scope.nameQuery = $scope.$parent.nameQuery;
+      $scope.userID = $scope.$parent.userID;
+      $scope.searching = false;
+      $scope.pounceButtonText = 'Pounce It!';
+      $scope.saving = false;
+      $scope.disabled = false;
+      var blankform = {
+          domainName: $scope.nameQuery.domainName,
+          email: '',
+          userID: $scope.userID
+        };
+      $scope.pounceIt = angular.copy(blankform);
+      console.log('$scope.nameQuery', $scope.nameQuery);
+      console.log('$scope.pounceIt', $scope.pounceIt);
+      $scope.showPost = false;
+    };
+    $scope.PounceIt = function () {
+      $scope.showPost = true;
     };
   }
 ]);
@@ -92,43 +152,3 @@ angular.module('loader', []).directive('ngLoader', function () {
     template: '<div ng-show="showLoader" class="ngLoader"><img src="http://axccdn.harsco.com/cdn/images/loading-spinner-24_whitebg.gif" /></div>'
   };
 });
-app.factory('JobData', [
-  '$http',
-  function ($http) {
-    var JobData = function (data) {
-      angular.extend(this, data);
-    };
-    var WCFServer = 'AXCUSCATLTRRIE1';
-    JobData.get = function (data) {
-      return $http.get('http://' + WCFServer + '/JobQueryWCF/Service1.svc/GetData').then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    JobData.getTest = function (data) {
-      return $http.get('http://' + WCFServer + '/JobQueryWCF/Service1.svc/TestData').then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    JobData.JSONWebService = function (data) {
-      return $http.get('http://' + WCFServer + '/JSONWebService/Service1.svc/GetAllCustomers').then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    JobData.post = function (data) {
-      return $http.post('http://' + WCFServer + '/JobQueryWCF/Service1.svc/GetAllFiles', data).then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    JobData.GetDataCP = function (data) {
-      return $http.post('http://' + WCFServer + '/CapacityPlanningWCF/Service1.svc/GetAllFiles', data).then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    JobData.GetAllFilesGet = function (data) {
-      return $http.get('http://' + WCFServer + '/JobQueryWCF/Service1.svc/GetAllFilesGet').then(function (response) {
-        return new JobData(response.data);
-      });
-    };
-    return JobData;
-  }
-]);

@@ -1,260 +1,58 @@
-li {
-    line-height: 30px;
+html {
+    /*background: url(../images/bg/cosmos_001.jpg) transparent no-repeat fixed center top;*/
 }
 
-.container {
-    width: 100%;
+body {
+    background: transparent;
+    padding-top: 70px;
+    /*color: #fff*/
 }
 
-/*.container.grid {
-    margin-bottom: 2%;
-}*/
-
-.select2-container {
-    margin: 0 5px 20px 0;
+nav {
+    position: absolute;
+    top: 3px;
+    right: 10px;
 }
 
-@media (min-width: 1200px) {
-    .row-fluid [class*="span"] {
-        margin-left: 0;
-        padding-left: 2%;
-        padding-right: 2%;
-    }
-}
-
-.clickable {
-    cursor: pointer;
-}
-
-.appbar {
-    width: 100%;
-    margin-bottom: 20px;
-    background-color: #1778bd;
-}
-
-.title {
-    font-family: 'OpenSansLight';
-    font-size: 24px;
-    font-weight: normal;
+header {
+    text-align: center;
+    font-size: 100%;
     color: #fff;
 }
 
-.logo {
-    padding: 10px 0;
-    margin-right: 20px;
-}
-
-.center {
-    text-align: center;
-}
-
-/*div[csvexport] {
-    margin-left: 50px;
-}*/
-
-div[ng-loader] {
-    display: inline;
-}
-
-.ngLoader {
-    display: inline-block;
-    width: 24px;
-    margin: 0 auto;
-    background: #ffffff;
-    text-align: center;
-}
-
-.ngViewport {
-    min-height: 600px;
-}
-
-.ngCellText {
-    height: 29px;
-}
-
-.ngGrid {
-    border: 1px solid #d4d4d4;
-}
-
-.ngHeaderContainer {
-    /*color: #ffffff;
-    background: #1778bd;*/
-    color: #000;
-    background: #fff;
-}
-
-.ngHeaderContainer .ngVerticalBarVisible {
-    /*background-color: #03B0D1;*/
-}
-
-.ngFooterPanel {
-    height: 0 !important;
-    background-color: #ffffff;
-    border-top: none;
-}
-
-.display-inlineBlock {
-    display: inline-block;
-}
-
-.display-inline {
-    display: inline;
-}
-
-.savingLoader {
-   /* margin-left: 100px;
-    padding: 5px;
-    font-family: 'OpenSansLight';*/
-    font-family: 'OpenSansLight';
-    position: absolute;
-    top: 75px;
-    left: 50%;
-    width: 56px;
-    margin-left: -54px;
-/*    color: #3a87ad;
-    background-color: #d9edf7;
-    border: 1px solid #bce8f1;
-    border-radius: 5px;*/
-}
-
-
-
-/*** GRID CELL COLORS ***/
-.color-early {
-    background-color: #83BDFC;
-}
-
-.color-late {
-    color: #ffffff;
-    background-color: #F1270C;
-}
-
-.color-latedone {
-    background-color: #FFF339;
-}
-
-.color-ontime {
-    background-color: #9DFF7A;
-}
-
-.color-ip {
-    background-color: #D0E585;
-}
-
-.color-ck {
-    background-color: #FC9F2D;
-}
-
-.color-cu {
-    background-color: #7DF2D7;
-}
-
-.color-i {
-    background-color: #ADA1BC;
-}
-
-.color-iss {
-    background-color: #F8B499;
-}
-
-.color-ns {
-    color: #ffffff;
-    background-color: #4251AB;
-}
-
-.color-rtc {
-    background-color: #A9C92A;
-}
-
-.color-rcu {
-    background-color: #8599E5;
-}
-
-.color-rti {
-    background-color: #2AC9BA;
-}
-
-
-/*** LEGEND ***/
-
-.legend {
+header .username{
+    margin: 16px 10px 0 0;
     font-size: 85%;
     font-weight: bold;
 }
 
-.legend li {
-    margin-left: 10px;
+.navbar {
+    border-radius: none;
 }
 
-.legend .label {
-    color: #000000;
-    text-shadow: none;
+.navbar-logout {
+    margin: 8px 15px;
 }
 
-.legend .label.color-ns, .legend .label.color-late {
-    color: #ffffff;
-    text-shadow: none;
+header h1 {
+    font-size: 14px;
 }
 
-/*** BOOTSTRAP OVERRIDES ***/
-.pad-top-20 {
-    padding-top: 20px;
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.pad-top-40 {
-    padding-top: 40px;
+.logo {
+    display: block;
+    width: 200px;
+    background: url(../images/logo.png) transparent no-repeat center top;
+    text-indent: -99999px;
+    width: 203px;
+    height: 26px;
 }
 
-.form-actions {
-    margin: 0;
-    padding-bottom: 0;
-}
-
-.ng-invalid .formRequire {
-    border-color: #e9322d;
-    -webkit-box-shadow: 0 0 6px #f8b9b7;
-    -moz-box-shadow: 0 0 6px #f8b9b7;
-    box-shadow: 0 0 6px #f8b9b7;
-}
-
-.btn-medium {
-    width: 140px;
-}
-
-.nav {
-    margin-bottom: 0;
-    padding-top: 10px;
-}
-
-.nav>li>a {
-    padding: 10px;
-    line-height: 1em;
-    color: #ffffff;
-    /*color: #1778bd;
-    background-color: #eeeeee;*/
-}
-
-.nav>li>a:hover {
-    color: #ffffff;
-    text-decoration: none;
-    /*border-bottom: 2px solid #ffffff;*/
-    background-color: #1778bd;
-}
-
-.nav .selected {
-    color: #ffffff;
-    text-decoration: none;
-    /*border-bottom: 2px solid #1778bd;*/
-    background-color: #1778bd;
-}
-
-.nav-horizontal>li {
-    float: left;
-    margin-right: 10px;
-}
-
-.alert {
-    margin-left: auto;
-    margin-right: auto;
-    /*width: 50%;*/
+.img-bg-cosmos {
+    background: url(../images/bg/cosmos_001.jpg) transparent no-repeat center center;
 }
